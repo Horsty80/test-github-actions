@@ -6,9 +6,9 @@ name: Build and publish the container image
     inputs:
       tag:
         # Friendly description to be shown in the UI instead of 'name'
-        description: 'Tag to deploy'
+        description: "Tag to deploy"
         # Default value if no value is explicitly provided
-        default: '1.0.0'
+        default: "1.0.0"
         # Input has to be provided for the workflow to run
         required: true
   push:
@@ -28,7 +28,7 @@ jobs:
         run: |
           echo "OWNER_LC=${OWNER,,}" >>${GITHUB_ENV}
         env:
-          OWNER: '${{ github.repository_owner }}'
+          OWNER: "${{ github.repository_owner }}"
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
@@ -58,4 +58,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/${{ OWNER_LC }}:${{ steps.repository.outputs.tag }}
+          tags: ghcr.io/horsty80:${{ steps.repository.outputs.tag }}
