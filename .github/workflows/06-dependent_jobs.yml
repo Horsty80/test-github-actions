@@ -1,5 +1,9 @@
 name: dependent_jobs
 
+on:
+  # Allow run it manually
+  [workflow_dispatch]
+
 jobs:
   setup:
     runs-on: ubuntu-latest
