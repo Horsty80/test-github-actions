@@ -10,3 +10,10 @@ jobs:
     steps:
       - name: Dump context
         uses: crazy-max/ghaction-dump-context@v1
+  
+  dump-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump context
+        if: github.actor == 'dependabot[bot]' // added condiontal
+        uses: crazy-max/ghaction-dump-context@v1
