@@ -1,0 +1,12 @@
+name: dump
+
+on:
+  # Allow run it manually
+  workflow_dispatch:
+
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump context
+        uses: crazy-max/ghaction-dump-context@v1
