@@ -13,13 +13,28 @@
 - [](./.github/workflows/0)
 
 # Tips :
+
 - By default all run in parallel at the same time.
 - If one jobs fails, all dependent jobs are skipped
-    - If conditional statement can force job to continue 
+  - If conditional statement can force job to continue
 - When a workflow job references an environment, the job won't start until all of the environment's protection rules pass
 - A job also cannot access secrets that are defined in an environment until all the environment protection rules pass.
 
 # Secrets :
+
 Multiple level for secrets :
+
 - Organization-level is the top of all, defined in one place for all repository
 - Repository Environment, can add reviewers to control access to the secrets
+
+# Jobs :
+
+Once an event is triggered, the series of steps carried out for that workflow is a step. A job could list a series of steps that run parallel to each other, also they could be configured to run in sequential order.
+
+# Actions
+
+An action is an element of a step and is basically a command. It is an action that gets executed on the runner, and as such, is the heart of Github Actions. We can have our own custom action such as npm install or leverage on existing actions created by the community such as the checkout action.
+
+# Steps
+
+These are the single elements that make up a job. A step groups the actions that are carried out on a runner.
