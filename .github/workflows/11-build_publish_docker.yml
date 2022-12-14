@@ -57,4 +57,4 @@ jobs:
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
           # Note: tags has to be all lower-case
-          tags: ghcr.io/horsty80:${{ steps.repository.outputs.tag }}
+          tags: ghcr.io/horsty80/react-app:${{ steps.repository.outputs.tag }}
