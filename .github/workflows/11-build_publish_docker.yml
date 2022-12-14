@@ -26,11 +26,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        
+
       - name: Get tag
         id: repository
         run: echo  "::set-output name=tag::${{ github.event.inputs.tag }}"
         # run: echo  "::set-output name=tag::$(git describe --tags HEAD)"
+      
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+        # https://github.com/docker/setup-qemu-action
+        # Add support for more platforms with QEMU (optional)
 
       - name: Set up Docker Buildx
         id: buildx
