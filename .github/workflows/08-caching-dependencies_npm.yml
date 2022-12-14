@@ -1,6 +1,7 @@
-name: Caching with npm
+name: 08-caching-dependencies_npm
 
-on: push
+on:
+  workflow_dispatch:
 
 jobs:
   build:

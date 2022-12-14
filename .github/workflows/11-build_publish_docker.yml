@@ -1,4 +1,4 @@
-name: Build and publish the container image
+name: 11-build_publish_docker
 
 "on":
   workflow_dispatch:

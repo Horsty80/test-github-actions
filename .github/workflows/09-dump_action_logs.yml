@@ -1,4 +1,4 @@
-name: dump
+name: 09-dump_action_logs
 
 on:
   # Allow run it manually
