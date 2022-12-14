@@ -24,6 +24,9 @@ jobs:
       contents: read
       packages: write
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
       - name: Get tag
         id: repository
         run: echo  "::set-output name=tag::${{ github.event.inputs.tag }}"
