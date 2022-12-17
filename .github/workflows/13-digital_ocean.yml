@@ -96,6 +96,6 @@ jobs:
             # Run a new container from a new image
             docker run -d \
             --restart always \
-            -p 8000:8000 \
+            -p 8768:80 \
             --name ${{env.IMAGE_NAME}} \
             ${{env.REGISTRY}}/horsty80/${{env.IMAGE_NAME}}:${{ needs.build_and_push.outputs.BRANCH }}.${{ needs.build_and_push.outputs.NUMBER_COMMIT }}-${{ needs.build_and_push.outputs.SHA_SHORT }}
