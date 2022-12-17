@@ -25,6 +25,18 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      
+      - name: Declare some variables
+        id: vars
+        shell: bash
+        run: |
+          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+  
+      - name: Check some variables
+        run: |
+          echo "Branch: ${{ steps.vars.outputs.branch }}"
+          echo "Sha: ${{ steps.vars.outputs.sha_short }}"
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -51,7 +63,7 @@ jobs:
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
           # Note: tags has to be all lower-case
-          tags: ${{env.REGISTRY}}/horsty80/${{env.IMAGE_NAME}}:${{env.GITHUB_SHA | head -c7}}
+          tags: ${{env.REGISTRY}}/horsty80/${{env.IMAGE_NAME}}:${{ steps.vars.outputs.branch }}.${{ steps.vars.outputs.sha_short }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -78,4 +90,4 @@ jobs:
             --restart always \
             -p 8000:8000 \
             --name ${{env.IMAGE_NAME}} \
-            ${{env.REGISTRY}}/horsty80/${{env.IMAGE_NAME}}:${{env.GITHUB_SHA | head -c7}}
+            ${{env.REGISTRY}}/horsty80/${{env.IMAGE_NAME}}:${{ steps.vars.outputs.branch }}.${{ steps.vars.outputs.sha_short }}
