@@ -37,7 +37,7 @@ jobs:
         run: |
           echo "BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
           echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-          echo "NUMBER_COMMIT=$(git rev-list --count main)" >> $GITHUB_OUTPUT
+          echo "NUMBER_COMMIT=$(git rev-list --count HEAD)" >> $GITHUB_OUTPUT
 
       - name: Check some variables
         run: |
@@ -82,7 +82,8 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSHKEY }}
+          passphrase: ${{ secrets.DEPLOYER_PASSPHRASE }}
+          key: ${{ secrets.DEPLOYER_SSH_KEY }}
           envs: IMAGE_NAME,REGISTRY,{{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           script: |
             # Login to registry
