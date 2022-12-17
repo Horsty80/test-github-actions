@@ -51,7 +51,7 @@ jobs:
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
           # Note: tags has to be all lower-case
-          tags: $(echo $REGISTRY)/horsty80/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
+          tags: ${{env.REGISTRY}}/horsty80/${{env.IMAGE_NAME}}:${{env.GITHUB_SHA | head -c7}}
 
   deploy:
     runs-on: ubuntu-latest
@@ -70,12 +70,12 @@ jobs:
             # No need the repository is public
             # docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} registry.digitalocean.com
             # Stop running container
-            docker stop $(echo $IMAGE_NAME)
+            docker stop ${{env.IMAGE_NAME}}
             # Remove old container
-            docker rm $(echo $IMAGE_NAME)
+            docker rm ${{env.IMAGE_NAME}}
             # Run a new container from a new image
             docker run -d \
             --restart always \
             -p 8000:8000 \
-            --name $(echo $IMAGE_NAME) \
-            $(echo $REGISTRY)/horsty80/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
+            --name ${{env.IMAGE_NAME}} \
+            ${{env.REGISTRY}}/horsty80/${{env.IMAGE_NAME}}:${{env.GITHUB_SHA | head -c7}}
