@@ -1,3 +1,5 @@
+name: 12-trigger_on_specific_path
+
 on:
   push:
     paths:

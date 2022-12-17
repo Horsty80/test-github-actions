@@ -1,4 +1,4 @@
-name: CI
+name: 13-digital_ocean
 
 # 1
 # Controls when the workflow will run
@@ -30,6 +30,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+          with:
+            fetch-depth: 0
 
       - name: Declare some variables
         id: vars
@@ -96,6 +98,7 @@ jobs:
             # Run a new container from a new image
             docker run -d \
             --restart always \
+            # -p external_container_port : inside_container_port
             -p 8768:80 \
             --name ${{env.IMAGE_NAME}} \
             ${{env.REGISTRY}}/horsty80/${{env.IMAGE_NAME}}:${{ needs.build_and_push.outputs.BRANCH }}.${{ needs.build_and_push.outputs.NUMBER_COMMIT }}-${{ needs.build_and_push.outputs.SHA_SHORT }}
