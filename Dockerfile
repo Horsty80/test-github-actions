@@ -26,6 +26,7 @@ RUN pnpm build
 RUN pnpm prune --prod
 
 FROM nginx:stable-alpine AS deploy
-COPY --from=build /app/dist /usr/share/nginx/html
+# Move app to html directory for nginx redirection
+COPY --from=build /app/dist /usr/share/nginx/html 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

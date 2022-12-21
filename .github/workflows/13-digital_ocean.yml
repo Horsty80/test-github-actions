@@ -79,7 +79,7 @@ jobs:
     needs: build_and_push
 
     steps:
-      - name: Deploy to Digital Ocean droplet via SSH action
+      - name: Deploy front to Digital Ocean droplet via SSH action
         uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.HOST }}
@@ -99,6 +99,7 @@ jobs:
             # -p external_container_port : inside_container_port
             docker run -d \
             --restart always \
+            -v "$(pwd)"/myApp/dev/config.front.js:/usr/share/nginx/html/config.js \
             -p 8768:80 \
             --name ${{env.IMAGE_NAME}} \
             ${{env.REGISTRY}}/horsty80/${{env.IMAGE_NAME}}:${{ needs.build_and_push.outputs.BRANCH }}.${{ needs.build_and_push.outputs.NUMBER_COMMIT }}-${{ needs.build_and_push.outputs.SHA_SHORT }}

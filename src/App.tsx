@@ -1,11 +1,11 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
-import config from "../config/config.json";
+import { getConfig } from "./helpers/config";
 
 function App() {
   const [count, setCount] = useState(0);
-  const { title, secret_data, public_data } = config;
+  const { title, secret_data, public_data } = getConfig();
 
   return (
     <div className="App">
