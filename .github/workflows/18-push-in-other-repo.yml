@@ -25,8 +25,13 @@ jobs:
         run: |
           cat single-web-app/dev/values.yaml
           git status
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          repository: Horsty80/test-github-env
+          # source-directory: 'output'
+          destination-github-username: 'Horsty80'
+          destination-repository-name: 'test-github-env'
         
 
