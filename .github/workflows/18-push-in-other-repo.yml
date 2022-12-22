@@ -26,12 +26,15 @@ jobs:
           cat single-web-app/dev/values.yaml
           git status
       - name: Pushes to another repository
-        uses: cpina/github-action-push-to-another-repository@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        uses: actions/checkout@v3
         with:
-          # source-directory: 'output'
-          destination-github-username: 'Horsty80'
-          destination-repository-name: 'test-github-env'
+          repository: Horsty80/test-github-env
+        run: |
+          date > generated.txt
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "generated"
+          git push
         
 
