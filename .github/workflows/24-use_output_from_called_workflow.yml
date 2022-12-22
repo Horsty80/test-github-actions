@@ -8,7 +8,7 @@ jobs:
     # local repo
     # uses: .github/workflows/called-workflow.yml@v1
     # other repo
-    uses: .github/workflows/23-can_be_call_&_pass_data.yml
+    uses: .github/workflows/23-can_be_call_&_pass_data.yml@v1
 
   job2:
     runs-on: ubuntu-latest
