@@ -19,6 +19,8 @@ jobs:
         uses: tj-actions/changed-files@v35
         with:
           json: true
+          files: |
+            .github/**
       - name: List all changed files
         run: |
           echo '${{ steps.changed-files.outputs.all_changed_files }}'
