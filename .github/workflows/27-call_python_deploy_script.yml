@@ -1,4 +1,4 @@
-name: 26-to_call_another_repo_workflow
+name: 27-call_python_deploy_script
 
 # Controls when the workflow will run
 on:
