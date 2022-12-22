@@ -1,0 +1,9 @@
+name: 22-use_other_workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call-wf1:
+    uses: ./.github/workflows/21-can_be_call.yml
+    secrets: inherit

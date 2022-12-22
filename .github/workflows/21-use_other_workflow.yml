@@ -1,9 +1,0 @@
-name: 21-use_other_workflow
-
-on:
-  workflow_dispatch:
-
-jobs:
-  call-wf1:
-    uses: ./.github/workflows/01-environment_variables.yml
-    secrets: inherit
