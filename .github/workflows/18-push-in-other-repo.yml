@@ -6,17 +6,13 @@ on:
 jobs:
   checkout:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-      issues: write
-      repository-projects: write
-      contents: write
     name: Get other repo
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           repository: Horsty80/test-github-env
+          token:  ${{ secrets.ACTIONS_GITHUB_TOKEN }}
       - name: Get SDK Version from config
         id: parseYaml
         uses: mikefarah/yq@master
