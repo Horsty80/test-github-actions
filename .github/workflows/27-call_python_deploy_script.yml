@@ -3,21 +3,21 @@ name: 26-to_call_another_repo_workflow
 # Controls when the workflow will run
 on:
   workflow_dispatch:
-    inputs: 
+    inputs:
       workflow2_name:
-        description: 'Workflow to call Name for Triggering'
+        description: "Workflow to call Name for Triggering"
         required: true
-        default: 'dispatch_workflow'
-      
+        default: "dispatch_workflow"
+
       workflow2_github_account:
-        description: 'GitHub Account Owner'
+        description: "GitHub Account Owner"
         required: true
-        default: 'github-actions'
-      
+        default: "Horsty80"
+
       workflow2_repo_github:
-        description: 'GitHub Repository Name'
+        description: "GitHub Repository Name"
         required: true
-        default: 'Horsty80/test-github-env'
+        default: "test-github-env"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -25,29 +25,28 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    env: 
+    env:
       pat_token: ${{ secrets.ACTIONS_GITHUB_TOKEN }}
       payload_Baseline_Number: "ABC_123"
       payload_Baseline_Revision: "main:front-2.0.32:34efe2"
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
       - name: setup python
         uses: actions/setup-python@v2
         with:
-         python-version: 3.8 #install the python needed
-         
+          python-version: 3.8 #install the python needed
+
       - name: Install dependencies
         run: |
-           cd "$GITHUB_WORKSPACE/Deployment-Scripts/"
-           python -m pip install --upgrade pip
-           pip install -r requirements.txt
-          
+          cd "$GITHUB_WORKSPACE/Deployment-Scripts/"
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
       - name: Trigger the Workflow
         run: |
-         cd "$GITHUB_WORKSPACE/Deployment-Scripts/"
-         python $GITHUB_WORKSPACE/Deployment-Scripts/workflow_trigger.py ${{ env.pat_token }}  ${{ github.event.inputs.workflow2_github_account}}  ${{ github.event.inputs.workflow2_repo_github}} ${{ github.event.inputs.workflow2_name}} ${{ env.payload_Baseline_Number }} ${{ env.payload_Baseline_Revision }}
+          cd "$GITHUB_WORKSPACE/Deployment-Scripts/"
+          python $GITHUB_WORKSPACE/Deployment-Scripts/workflow_trigger.py ${{ env.pat_token }}  ${{ github.event.inputs.workflow2_github_account}}  ${{ github.event.inputs.workflow2_repo_github}} ${{ github.event.inputs.workflow2_name}} ${{ env.payload_Baseline_Number }} ${{ env.payload_Baseline_Revision }}
