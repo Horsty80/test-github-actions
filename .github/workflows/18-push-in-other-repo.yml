@@ -1,0 +1,32 @@
+name: 18-push-in-other-repo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  checkout:
+    runs-on: ubuntu-latest
+    name: Get other repo
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          repository: Horsty80/test-github-env
+      - name: Get SDK Version from config
+        id: parseYaml
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq '.components[0].version' single-web-app/dev/values.yaml
+      - name: Write inside yml the last version
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq -i '.components[0].last_version = "${{ steps.parseYaml.outputs.result }}"' single-web-app/dev/values.yaml
+      - name: Test
+        run: |
+          cat single-web-app/dev/values.yaml
+          git status
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          repository: Horsty80/test-github-env
+        
+
