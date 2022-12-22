@@ -5,6 +5,7 @@ on:
 
 jobs:
   checkout:
+    runs-on: ubuntu-latest
     name: Get other repo
     steps:
       - name: Checkout
