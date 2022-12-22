@@ -6,6 +6,11 @@ on:
 jobs:
   checkout:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      issues: write
+      repository-projects: write
+      contents: write
     name: Get other repo
     steps:
       - name: Checkout
@@ -27,7 +32,6 @@ jobs:
           git status
       - name: Pushes to another repository
         run: |
-          date > generated.txt
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
