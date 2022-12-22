@@ -1,0 +1,16 @@
+name: 16-modify-other-repo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  checkout:
+    name: Get other repo
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          repository: Horsty80/test-github-env
+      - name: Test
+        run: |
+          ls

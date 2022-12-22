@@ -1,4 +1,4 @@
-name: Manual Matrix Test
+name: 15-matrix_with_changed_files
 
 on:
   workflow_dispatch:
