@@ -1,10 +1,10 @@
-name: 18-push-in-other-repo
+name: 19-generate-package-name
 
 on:
   workflow_dispatch:
 
 jobs:
-  build_and_push:
+  get_git_info:
     runs-on: ubuntu-latest
     outputs:
       BRANCH: ${{ steps.vars.outputs.BRANCH }}
