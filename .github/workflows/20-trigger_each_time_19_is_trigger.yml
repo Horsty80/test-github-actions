@@ -1,0 +1,18 @@
+name: 20-trigger_each_time_19_is_trigger
+
+# Only trigger, when the build workflow succeeded
+on:
+  workflow_run:
+    workflows: ["19-generate-package-name"]
+    types:
+      - completed
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Notify
+        run: echo 'i am trigger !'
