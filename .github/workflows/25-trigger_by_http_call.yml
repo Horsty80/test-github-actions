@@ -1,0 +1,18 @@
+name: 25-trigger_by_http_call
+
+on:
+  repository_dispatch:
+    types: [start-example-workflow]
+
+
+
+##
+# POST : https://api.github.com/repos/:owner/:repo/dispatches
+
+# {
+#     "event_type": "start-example-workflow"
+# }
+
+# Accept:  application/json
+# Content-Type: application/json
+# Authorization: Bearer {{personal_access_token}}<br><br>
