@@ -1,0 +1,31 @@
+name: 17-parse-yaml
+
+on:
+  workflow_dispatch:
+
+jobs:
+  parse_yaml:
+    runs-on: ubuntu-latest
+    name: Get repo and parse yml file
+    steps:
+      # get repository code
+      - uses: actions/checkout@v3
+      #
+      # Parse yaml to get value
+      #
+      - name: Get SDK Version from config
+        id: parseYaml
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq '.container[0].version' example.yaml
+      - name: Run a one-line script
+        run: echo This is dev stuff! ${{ steps.parseYaml.outputs.result }}
+      - name: Write inside yml
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq -i '.a.b[0].c = "cool"' example.yaml
+      - name: Test
+        run: |
+          cat example.yaml
+          git status
+        
