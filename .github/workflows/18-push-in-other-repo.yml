@@ -26,9 +26,6 @@ jobs:
           cat single-web-app/dev/values.yaml
           git status
       - name: Pushes to another repository
-        uses: actions/checkout@v3
-        with:
-          repository: Horsty80/test-github-env
         run: |
           date > generated.txt
           git config user.name github-actions
@@ -36,5 +33,3 @@ jobs:
           git add .
           git commit -m "generated"
           git push
-        
-
