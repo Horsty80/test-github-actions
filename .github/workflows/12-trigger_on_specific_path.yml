@@ -3,19 +3,19 @@ name: 12-trigger_on_specific_path
 on:
   push:
     paths:
-      - 'src/**'
-      - '!src/assets/**'
+      - "src/**"
+      - "!src/assets/**"
 
 env:
   ## Sets environment variable
-  API_KEY: XXXXXXXXXXXX    
+  API_KEY: XXXXXXXXXXXX
 
 jobs:
   job1:
-    ## The type of runner that the job will run on, 
+    ## The type of runner that the job will run on,
     ## here it runs on ubuntu latest
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
     steps:
       - name: step 1
         ## Reference your environment variables
-        run: echo "The API key is:${{env.API_KEY}}"   
+        run: echo "The API key is:${{env.API_KEY}}"
