@@ -1,0 +1,32 @@
+name: 18-push-in-other-repo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    outputs:
+      BRANCH: ${{ steps.vars.outputs.BRANCH }}
+      SHA_SHORT: ${{ steps.vars.outputs.SHA_SHORT }}
+      NUMBER_COMMIT: ${{ steps.vars.outputs.NUMBER_COMMIT }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Declare some variables
+        id: vars
+        shell: bash
+        run: |
+          echo "BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
+          echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+          echo "NUMBER_COMMIT=$(git rev-list --count HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Check some variables
+        run: |
+          echo "Branch: ${{ steps.vars.outputs.BRANCH }}"
+          echo "Sha: ${{ steps.vars.outputs.SHA_SHORT }}"
+          echo "Commit number: ${{ steps.vars.outputs.NUMBER_COMMIT }}"
