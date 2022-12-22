@@ -4,7 +4,10 @@ on:
   repository_dispatch:
     types: [start-example-workflow]
 
-
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    - run: echo work in progress
 
 ##
 # POST : https://api.github.com/repos/:owner/:repo/dispatches
